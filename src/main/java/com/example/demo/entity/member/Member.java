@@ -15,15 +15,20 @@ public class Member {
     public Member() {
     }
 
-    public Member(String id, String password, Boolean active) {
-        this.userId = id;
+    public Member(Long id, String username, String password, Boolean active) {
+        this.id = id;
+        this.username = username;
         this.password = password;
         this.active = active;
     }
 
     @Id
-    @Column(name = "user_id")
-    private String userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "password")
     private String password;
@@ -31,13 +36,13 @@ public class Member {
     @Column(name = "active")
     private Boolean active;
 
-    @Formula("(select a.role from roles a where a.user_id = user_id)")
+    @Formula("(select a.role from roles a where a.user_id = id)")
     public String access;
 
     @Override
     public String toString() {
         return "Member{" +
-                "id='" + userId + '\'' +
+                "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", active=" + active +
                 '}';

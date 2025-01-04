@@ -19,8 +19,8 @@
     <form action="#" th:action="@{/member/save}" method="post" th:object="${member}">
 
         <div class="row">
-            <input class="form-control mb-4 w-25" type="text" th:field="*{userId}" placeholder="User Name"/>
-            <span  th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}"
+            <input class="form-control mb-4 w-25" type="text" th:field="*{username}" placeholder="User Name"/>
+            <span  th:if="${#fields.hasErrors('username')}" th:errors="*{username}"
                   style="color: red;font-size: 10px;width: 50% !important;"></span>
         </div>
         <div class="row">

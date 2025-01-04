@@ -30,9 +30,9 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void save(String userId, String password) {
+    public void save(String username, String password) {
         Member member = new Member();
-        member.setUserId(userId);
+        member.setUsername(username);
         member.setPassword("{bcrypt}"+passwordEncoder.encode(password));
         member.setActive(true);
         memberRepository.save(member);

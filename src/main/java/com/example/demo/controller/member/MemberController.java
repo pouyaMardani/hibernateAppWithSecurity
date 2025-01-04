@@ -56,7 +56,7 @@ public class MemberController {
         if (bindingResults.hasErrors()) {
             return "employee/employeeForm";
         } else {
-            memberService.save(member.getUserId(),member.getPassword());
+            memberService.save(member.getUsername(),member.getPassword());
             return "redirect:/loginPage";
         }
     }
