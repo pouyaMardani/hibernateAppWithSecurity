@@ -17,10 +17,6 @@ import javax.sql.DataSource;
 @Configuration
 public class DemoSecurityConfig {
 
-
-
-
-
     @Bean
     public UserDetailsManager userDetailsManager (DataSource dataSource){
         JdbcUserDetailsManager userDetailsManager =  new JdbcUserDetailsManager(dataSource);
@@ -30,8 +26,6 @@ public class DemoSecurityConfig {
 
         return userDetailsManager;
     }
-
-
 
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http)throws Exception{

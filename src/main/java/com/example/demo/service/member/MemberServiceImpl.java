@@ -41,6 +41,18 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Member findById(int id) {
+        Optional<Member> result = memberRepository.findById(id);
+        Member member = new Member();
+        if(result.isPresent()){
+            member = result.get();
+        }else {
+            throw new RuntimeException("error not found");
+        }
+        return member;
+    }
+
+    @Override
     public List<Member> findAll() {
         List<Member> members =  memberRepository.findAll();
         return members;

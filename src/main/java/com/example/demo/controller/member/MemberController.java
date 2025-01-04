@@ -1,9 +1,12 @@
 package com.example.demo.controller.member;
 
 
+import com.example.demo.entity.employee.Employee;
 import com.example.demo.entity.member.Member;
+import com.example.demo.entity.role.RoleType;
 import com.example.demo.service.employee.EmployeeService;
 import com.example.demo.service.member.MemberService;
+import com.example.demo.service.role.RoleService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
@@ -24,8 +27,11 @@ public class MemberController {
 
     private MemberService memberService;
 
-    public MemberController(MemberService memberService) {
+    private RoleService roleService  ;
+
+    public MemberController(MemberService memberService,RoleService roleService) {
         this.memberService = memberService;
+        this.roleService = roleService;
     }
 
     @InitBinder
@@ -60,12 +66,31 @@ public class MemberController {
             return "redirect:/loginPage";
         }
     }
-    @GetMapping("/delete")
+
+
+    /*------------------------------UPDATE ACCESS-----------------------------*/
+
+    @GetMapping("/showFormForUpdate")
+    public String update(@RequestParam("memberId") Long memberId, Model model) {
+
+        Member member = memberService.findById(memberId.intValue());
+        model.addAttribute("member", member);
+
+        return "member/memberAccess";
+    }
+    @PostMapping("/changeAccess")
+    public String changeAccess(@ModelAttribute("member") Member member) {
+
+        roleService.findByUserId(member.getId(),member.getAccess());
+        return "member/listMemberForm";
+    }
+
+   /* @GetMapping("/delete")
     public String delete(@RequestParam("employeeId") int theId) {
 
-       /* employeeService.deleteById(theId);*/
+       *//* employeeService.deleteById(theId);*//*
         return "redirect:/employees/list";
 
-    }
+    }*/
 
 }

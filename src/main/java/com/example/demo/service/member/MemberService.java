@@ -11,5 +11,7 @@ public interface MemberService {
     @Transactional
     void save(String userId, String password);
 
+    Member findById(int id);
+
     List<Member> findAll();
 }
